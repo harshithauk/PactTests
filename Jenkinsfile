@@ -3,7 +3,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'java --version'
+                sh 'echo build stage executed'
+            }
+        }
+        stage('stage2') {
+            steps {
+                sh 'echo stage2 executed'
             }
         }
     }
