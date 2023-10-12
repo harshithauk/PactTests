@@ -1,0 +1,60 @@
+{
+  "provider": {
+    "name": "TopicProvider"
+  },
+  "consumer": {
+    "name": "TopicConsumer"
+  },
+  "interactions": [
+    {
+      "description": "getting a specific course details",
+      "request": {
+        "method": "GET",
+        "path": "/topics/1"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "name": "Web",
+          "id": 1
+        },
+        "matchingRules": {
+          "body": {
+            "$.id": {
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.name": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "topics exist"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "4.0.10"
+    }
+  }
+}
