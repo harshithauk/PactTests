@@ -14,8 +14,9 @@ pipeline {
             }
         }
 
-        stage('build') {
+        stage('Consumerbuild') {
             steps {
+                sh 'mvn -f PactDemoConsumer/pom.xml'
                 sh 'mvn -B -DskipTests clean package'
             }
         }
