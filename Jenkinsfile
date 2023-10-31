@@ -13,10 +13,19 @@ pipeline {
                 '''
             }
         }
+
         stage('build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
+        steps {
+            sh 'mvn -Dmaven.test.failure.ignore=true install'
+        }
+        post {
+            success {
+                junit 'target/surefire-reports/**/*.xml'
             }
+        }
+//             steps {
+//                 sh 'mvn -B -DskipTests clean package'
+//             }
         }
         stage('ConsumerTest') {
             steps {
