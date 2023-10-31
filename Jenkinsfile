@@ -3,12 +3,17 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'echo build stage executed'
+                sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('stage2') {
+        stage('ConsumerTest') {
             steps {
-                sh 'echo stage2 executed'
+                sh 'mvn test -Dtest=PactConsumerTest'
+            }
+        }
+        stage('ProviderTest') {
+            steps {
+                sh 'mvn test -Dtest=PactProviderTest'
             }
         }
     }
