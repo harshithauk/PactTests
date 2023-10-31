@@ -16,20 +16,23 @@ pipeline {
 
         stage('Consumerbuild') {
             steps {
-                sh 'mvn -f PactDemoConsumer/pom.xml'
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn -f PactDemoConsumer/pom.xml clean package'
+            }
+        }
+        stage('Providerbuild') {
+            steps {
+                sh 'mvn -f PactDemoProvider/pom.xml clean package'
             }
         }
         stage('ConsumerTest') {
             steps {
-                sh 'mvn -f PactDemoConsumer/pom.xml'
-                sh 'mvn  test -Dtest=PactConsumerTest'
+                sh 'mvn -f PactDemoConsumer/pom.xml  test -Dtest=PactConsumerTest'
             }
         }
-//         stage('ProviderTest') {
-//             steps {
-//                 sh 'mvn test -Dtest=PactProviderTest'
-//             }
-//         }
+        stage('ProviderTest') {
+            steps {
+                sh 'mvn -f PactDemoProvider/pom.xml test -Dtest=PactProviderTest'
+            }
+        }
     }
 }
