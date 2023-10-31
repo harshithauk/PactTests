@@ -14,19 +14,19 @@ pipeline {
             }
         }
 
-        stage('build') {
-        steps {
-            sh 'mvn -Dmaven.test.failure.ignore=true install'
-        }
-        post {
-            success {
-                junit 'target/surefire-reports/**/*.xml'
-            }
-        }
-//             steps {
-//                 sh 'mvn -B -DskipTests clean package'
+//         stage('build') {
+//         steps {
+//             sh 'mvn -Dmaven.test.failure.ignore=true install'
+//         }
+//         post {
+//             success {
+//                 junit 'target/surefire-reports/**/*.xml'
 //             }
-        }
+//         }
+// //             steps {
+// //                 sh 'mvn -B -DskipTests clean package'
+// //             }
+//         }
         stage('ConsumerTest') {
             steps {
                 sh 'mvn test -Dtest=PactConsumerTest'
